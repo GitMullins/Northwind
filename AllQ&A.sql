@@ -38,3 +38,30 @@ select top(10)ProductId,
 	UnitPrice
 from Products
 order by UnitPrice desc
+
+
+
+--6. In which quarter in 1997 did we have the most revenue?
+select
+	format(sum(case
+		when OrderDate between '01/01/1997' and '3/31/1997'
+		then UnitPrice * Quantity
+		else 0
+		end),'c') as Qtr1,
+	format(sum(case
+		when OrderDate between '04/01/1997' and '06/30/1997'
+		then UnitPrice * Quantity
+		else 0
+		end),'c') as Qtr2,
+	format(sum(case
+		when OrderDate between '07/01/1997' and '09/30/1997'
+		then UnitPrice * Quantity
+		else 0
+		end),'c') as Qtr3,
+	format(sum(case
+		when OrderDate between '10/01/1997' and '12/31/1997'
+		then UnitPrice * Quantity
+		else 0
+		end),'c') as Qtr4
+from Orders o
+	join [Order Details] od on od.OrderID = o.OrderId
