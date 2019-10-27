@@ -65,3 +65,15 @@ select
 		end),'c') as Qtr4
 from Orders o
 	join [Order Details] od on od.OrderID = o.OrderId
+
+
+
+--7. Which products have a price that is higher than average?
+select 
+	--count(ProductID) as TotalProducts,
+	--sum(UnitPrice) as SumOfPrices,
+	ProductId,
+	UnitPrice
+from Products
+where UnitPrice > (select avg(UnitPrice) from Products)
+order by UnitPrice
