@@ -30,3 +30,11 @@ from [Order Details] od
 	join Products p on p.ProductID = od.ProductID
 	join Categories c on p.CategoryID = c.CategoryID
 group by c.CategoryName
+
+
+
+--5. What are our 10 most expensive products?
+select top(10)ProductId,
+	UnitPrice
+from Products
+order by UnitPrice desc
